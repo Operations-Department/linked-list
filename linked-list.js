@@ -117,8 +117,20 @@ class LinkedList {
         return false;
     }
 
+    //returns the index of the node containing value, or null if not found.
     find(value) {
-        //returns the index of the node containing value, or null if not found.
+        if (!this.head) return
+
+        let current = this.head;
+        let count = 0;
+
+        while (current) {
+            if (value === current.value) return `${value} found at index ${count}`;
+            current = current.next;
+            count++
+        }
+
+        return `Error 404: ${value} not found`;
     }
 
 
@@ -166,4 +178,4 @@ console.log(myList.toString());
 // console.log(myList.getTail());
 // console.log(myList.getIndex(2));
 // console.log(myList.contains(15));
-
+console.log(myList.find(16));
