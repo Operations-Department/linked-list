@@ -10,6 +10,7 @@ class LinkedList {
         this.head = null;
     }
 
+    //adds new node to end
     append(value) {
         const node = new Node(value);
 
@@ -27,6 +28,7 @@ class LinkedList {
         }
     }
 
+    //adds new node to front
     prepend(value) {
         const newNode = new Node(value);
 
@@ -40,6 +42,7 @@ class LinkedList {
         }
     }
 
+    //returns node count
     getSize() {
         let size = 0;
         let current = this.head;
@@ -52,10 +55,12 @@ class LinkedList {
         return `This list has ${size} nodes`; 
     }
 
+    //returns first node
     getHead() {
         return `The first node is ${this.head.value}`;
     }
 
+    //returns last node
     getTail() {
         let current = this.head;
 
@@ -66,6 +71,7 @@ class LinkedList {
         return `The last node is ${current.value}`;
     }
 
+    //returns node at given index
     getIndex(n) {
         if (typeof n !== 'number' || n < 0) return 'enter a number zero or higher';
         if (!this.head) return 'the list is empty';
@@ -80,6 +86,7 @@ class LinkedList {
         return `the value at index ${n} is ${current.value}`;
     }
 
+    //removes last node
     pop() {
         if (!this.head) return "The list is empty.";
 
@@ -91,13 +98,31 @@ class LinkedList {
             current = current.next;
         }
     
-        let removedNode = previous;
+        let removedNode = current;
         if (!previous) this.head = null; //there is only one node in the list
         previous.next = null;
 
         return `Removed node with value ${removedNode.value}. The list is now: ${this.toString()}`;
     }
 
+    //returns if true if passed in value if in the list
+    contains(value) {
+        let current = this.head;
+
+        while (current) {
+            if (current.value === value) return true;
+            current = current.next;
+        }
+
+        return false;
+    }
+
+    find(value) {
+        //returns the index of the node containing value, or null if not found.
+    }
+
+
+    //returns all nodes in order
     toString() {
         let wholeList = '';
         let current = this.head;
@@ -109,6 +134,14 @@ class LinkedList {
 
         wholeList += `null`;
         return wholeList.trim();
+    }
+
+    insert(value, index) {
+        //that inserts a new node with the provided value at the given index.
+    }
+
+    removeAt(index) {
+        //that removes the node at the given index. 
     }
 }
 
@@ -124,11 +157,13 @@ myList.prepend(1);
 
 
 console.log(myList.toString());
-console.log(myList.getSize());
+// console.log(myList.getSize());
 
-console.log(myList.pop());
+// console.log(myList.pop());
 
-console.log(myList.getSize());
-console.log(myList.getHead());
-console.log(myList.getTail());
-console.log(myList.getIndex(2));
+// console.log(myList.getSize());
+// console.log(myList.getHead());
+// console.log(myList.getTail());
+// console.log(myList.getIndex(2));
+// console.log(myList.contains(15));
+
