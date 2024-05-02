@@ -148,12 +148,53 @@ class LinkedList {
         return wholeList.trim();
     }
 
+    //inserts a new node with the provided value at the given index.
     insert(value, index) {
-        //that inserts a new node with the provided value at the given index.
+        if (!this.head) return
+        if (index < 0 || typeof index !== 'number') return `Enter a number 0 or higher`;
+
+        const newNode = new Node(value);
+        let current = this.head;
+        let previous = null;
+        let currentIndex = 0;
+
+        while (current && currentIndex < index) {
+            previous = current;
+            current = current.next;
+            currentIndex++;
+        }
+
+        if (currentIndex !== index) return 'Cannot insert node here, out of bounds';
+
+        if (previous) {
+            previous.next = newNode;
+            newNode.next = current;
+        } else {  
+            //insert at head position
+            this.prepend(value);
+        }
     }
 
+    //removes the node at the given index. 
     removeAt(index) {
-        //that removes the node at the given index. 
+        if (!this.head) return 
+        if (index < 0 || typeof index !== 'number') return 'Enter a number greater than or equal to 0';
+        
+        let current = this.head;
+        let previous = null
+        let counter = 0;
+
+        while (current && counter < index) {
+            previous = current;
+            current = current.next;
+            counter++;
+        }
+
+        if (counter !== index) return `Error: index ${index} not found`;
+        if (previous) previous.next = current.next; //remove node by setting its' previous node's pointer to the next node over
+
+        if (!previous) this.head = current.next //remove head
+        if (!current.next) previous.next = null; //remove last
     }
 }
 
@@ -162,6 +203,7 @@ const myList = new LinkedList();
 myList.append(5);
 myList.append(10);
 myList.append(15);
+myList.append(25);
 
 myList.prepend(21);
 myList.prepend(1);
@@ -169,13 +211,17 @@ myList.prepend(1);
 
 
 console.log(myList.toString());
-// console.log(myList.getSize());
+console.log(myList.getSize());
 
-// console.log(myList.pop());
+console.log(myList.pop());
 
-// console.log(myList.getSize());
-// console.log(myList.getHead());
-// console.log(myList.getTail());
-// console.log(myList.getIndex(2));
-// console.log(myList.contains(15));
-console.log(myList.find(16));
+console.log(myList.getSize());
+console.log(myList.getHead());
+console.log(myList.getTail());
+console.log(myList.getIndex(2));
+console.log(myList.contains(15));
+console.log(myList.find(15));
+console.log(myList.insert(75, 3));
+console.log(myList.removeAt(5));
+
+console.log(myList.toString());
